@@ -69,7 +69,7 @@ class SearchBook extends Component {
                     }
 
                     {error && (
-                        <h3>No books found. Please try again!</h3>
+                        <div className='alert alert-warning'>No books found. Please try again!</div>
                     )}
                 </div>
             </div>
