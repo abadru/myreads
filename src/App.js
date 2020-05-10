@@ -1,6 +1,6 @@
-import React from 'react'
-import * as BooksAPI from './BooksAPI'
-import './App.css'
+import React from 'react';
+import * as BooksAPI from './api/BooksAPI';
+import './App.css';
 import SearchBook from "./SearchBook";
 import ListBooks from "./ListBooks";
 import {Link, Route} from "react-router-dom";
@@ -25,7 +25,7 @@ class BooksApp extends React.Component {
             // Update book shelf
             updatedBook.shelf = shelf;
             // filter the updated book
-            const currentBook= this.state.books.filter(book => book.id !== updatedBook.id);
+            const currentBook = this.state.books.filter(book => book.id !== updatedBook.id);
 
             // Add updated book into the shelf
             const currentBookShelf = [...currentBook, updatedBook];
@@ -47,13 +47,15 @@ class BooksApp extends React.Component {
                     render={() => (
                         <div className="list-books">
                             <div className="list-books-title">
-                                <h1>MyReads</h1>
+                                <h1>My Reads</h1>
                             </div>
                             <ListBooks
                                 books={books}
                                 updateBookShelf={this.updateBookShelf}/>
                             <div className="open-search">
-                                <Link to="/search"><button>Search</button></Link>
+                                <Link to="/search">
+                                    <button>Search</button>
+                                </Link>
                             </div>
                         </div>
                     )}

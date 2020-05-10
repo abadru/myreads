@@ -3,12 +3,16 @@ import PropTypes from 'prop-types';
 import BookShelf from './BookShelf';
 import {Link} from "react-router-dom";
 
+/*
+    This component is the home component displaying the books grouped by shelf type
+    For each shelf type it filters the books corresponding the the actual shelf and render the books
+ */
 const BookList = props => {
-    const { books, updateBookShelf } = props;
+    const {books, updateBookShelf} = props;
     const shelfTypes = [
-        { type: 'currentlyReading', title: 'Currently Reading' },
-        { type: 'wantToRead', title: 'Want to Read' },
-        { type: 'read', title: 'Read' }
+        {type: 'currentlyReading', title: 'Currently Reading'},
+        {type: 'wantToRead', title: 'Want to Read'},
+        {type: 'read', title: 'Read'}
     ];
 
     return (
@@ -19,7 +23,7 @@ const BookList = props => {
                     <div className="bookshelf" key={index}>
                         <h2 className="bookshelf-title">{shelf.title}</h2>
                         <div className="bookshelf-books">
-                            <BookShelf books={shelfBooks} updateBookShelf={updateBookShelf} />
+                            <BookShelf books={shelfBooks} updateBookShelf={updateBookShelf}/>
                         </div>
                     </div>
                 );

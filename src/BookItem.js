@@ -2,16 +2,19 @@ import React from "react";
 import ShelfUpdater from "./ShelfUpdater";
 import PropTypes from 'prop-types';
 
+/* This component is a stateless component responsible only on rendering a book details and the dropdown for shelf
+   updating. It receives the book to render as well as the list of books to pass into BookShelf component
+*/
 
 const BookItem = (props) => {
-    const { book, books, updateBookShelf } = props;
+    const {book, books, updateBookShelf} = props;
     return (
         <li>
             <div className="book">
                 <div className="book-top">
                     <div
                         className="book-cover"
-                        style={{ width: 128, height: 193, backgroundImage: `url("${book.imageLinks.thumbnail}")` }}>
+                        style={{width: 128, height: 193, backgroundImage: `url("${book.imageLinks.thumbnail}")`}}>
                     </div>
                     <ShelfUpdater
                         book={book}

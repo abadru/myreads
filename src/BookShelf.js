@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import BookItem from "./BookItem";
 
@@ -9,7 +9,7 @@ class BookShelf extends Component {
     };
 
     render() {
-        const { books, updateBookShelf } = this.props;
+        const {books, updateBookShelf} = this.props;
 
         return (
             <ol className="books-grid">
