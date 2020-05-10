@@ -29,8 +29,8 @@ A new browser window should automatically open displaying the app. If it doesn't
 
 ## How to Use the App
 
-- Books are sorted into three categories: Currently Reading, Want to Read and Read
-- To change a book's category or remove a book from the list, click on the green button on the book cover
+- Books are grouped into three categories: Currently Reading, Want to Read and Read
+- To change a book's category or remove a book from the list, click on the green button on the book cover. The book will immediatly appear on new category.
 
-- To add new books, click on the green + button at the bottom of the page.
+- To add new books, click on the green + button at the bottom of the page and you will be navigated to a search page.
   Enter an author's name or subject. A resultset of books will be returned.
