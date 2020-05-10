@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 
 class ShelfUpdater extends Component {
@@ -13,7 +13,7 @@ class ShelfUpdater extends Component {
     }
 
     render() {
-        const { book, books } = this.props;
+        const {book, books} = this.props;
         // Determine the book shelf
         // First, set current shelf to none as default
         let currentShelf = 'none';

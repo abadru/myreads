@@ -7,7 +7,7 @@ import {Link} from "react-router-dom";
  */
 
 const SearchBox = (props) => {
-    const {query, getBooks } = props;
+    const {query, getBooks} = props;
     return (
         <div className="search-books-bar">
             <Link to='/' className="close-search">Close</Link>
@@ -24,7 +24,7 @@ const SearchBox = (props) => {
 };
 
 SearchBox.propTypes = {
-    query: PropTypes.object.isRequired,
+    query: PropTypes.string.isRequired,
     getBooks: PropTypes.func.isRequired
 };
 

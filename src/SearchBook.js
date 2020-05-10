@@ -1,9 +1,8 @@
 import React, {Component} from "react";
-import {Link} from "react-router-dom";
-import BookItem from "./BookItem";
 import * as BooksAPI from "./api/BooksAPI";
 import PropTypes from 'prop-types';
 import SearchBox from "./SearchBox";
+import BookItemList from "./BookItemList";
 
 
 class SearchBook extends Component {
@@ -43,19 +42,11 @@ class SearchBook extends Component {
                 <div className="search-books-results">
                     {
                         newBooks.length > 0 && (
-                            <ol className="books-grid">
-                                {
-                                    newBooks.map(book => (
-                                            <BookItem
-                                                key={book.id}
-                                                book={book}
-                                                books={books}
-                                                updateBookShelf={updateBookShelf}
-                                            />
-                                        )
-                                    )
-                                }
-                            </ol>
+                            <BookItemList
+                                books={books}
+                                booksToList={newBooks}
+                                updateBookShelf={updateBookShelf}
+                            />
                         )
                     }
 
