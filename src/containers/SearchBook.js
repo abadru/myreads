@@ -1,8 +1,8 @@
 import React, {Component} from "react";
-import * as BooksAPI from "./api/BooksAPI";
+import * as BooksAPI from "../api/BooksAPI";
 import PropTypes from 'prop-types';
-import SearchBox from "./SearchBox";
-import BookItemList from "./BookItemList";
+import SearchBox from "../components/SearchBox";
+import BookItemList from "../components/BookItemList";
 
 
 class SearchBook extends Component {
