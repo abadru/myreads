@@ -17,16 +17,16 @@ class SearchBook extends Component {
         error: false
     };
 
-    getBooks = (query) => {
+    getBooks = async (query) => {
         this.setState({query});
 
         // Get books only if user types something on the input box
         if (query) {
-            BooksAPI.search(query.trim()).then(books => {
-                books.length > 0
-                    ? this.setState({newBooks: books, error: false})
-                    : this.setState({newBooks: [], error: true});
-            });
+
+            const books = await BooksAPI.search(query.trim());
+            books.length > 0
+                ? this.setState({newBooks: books, error: false})
+                : this.setState({newBooks: [], error: true});
         } else {
             this.setState({newBooks: [], error: false});
         }
