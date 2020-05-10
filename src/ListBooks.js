@@ -3,7 +3,12 @@ import {Link} from "react-router-dom";
 import BookItem from "./BookItem";
 
 const ListBooks = (props) => {
-    const {booksCurrentlyReading, booksWantToRead, booksRead} = props;
+    const {books} = props;
+
+    const booksCurrentlyReading = books.filter (book => book.shelf === 'currentlyReading');
+    const booksWantToRead = books.filter (book => book.shelf === 'wantToRead');
+    const booksRead = books.filter (book => book.shelf === 'read');
+
     return (
         <div className="list-books">
             <div className="list-books-title">

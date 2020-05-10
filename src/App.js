@@ -7,10 +7,7 @@ import {Route} from "react-router-dom";
 
 class BooksApp extends React.Component {
     state = {
-        books: [],
-        currentlyReading: [],
-        wantToRead: [],
-        read: []
+        books: []
     };
 
     componentDidMount() {
@@ -18,10 +15,7 @@ class BooksApp extends React.Component {
             .then((books) => {
                 console.log('Books', books);
                 this.setState(() => ({
-                    books,
-                    currentlyReading: books.filter (book => book.shelf === 'currentlyReading'),
-                    wantToRead: books.filter (book => book.shelf === 'wantToRead'),
-                    read: books.filter (book => book.shelf === 'read')
+                    books
                 }));
             });
     }
@@ -31,13 +25,11 @@ class BooksApp extends React.Component {
             <div className="app">
                 <Route exact path='/' render={() => (
                     <ListBooks
-                        booksCurrentlyReading = {this.state.currentlyReading}
-                        booksWantToRead = {this.state.wantToRead}
-                        booksRead = {this.state.read}
+                        books={this.state.books}
                     />
                 )}/>
                 <Route path='/search' render={({history}) => (
-                    <SearchBook books ={this.state.books} />
+                    <SearchBook books={this.state.books}/>
                 )}/>
             </div>
         )
