@@ -18,21 +18,18 @@ class BooksApp extends React.Component {
        }));
     }
 
-    updateBookShelf = (updatedBook, shelf) => {
-        BooksAPI.update(updatedBook, shelf).then(response => {
-            // Update book shelf
-            updatedBook.shelf = shelf;
-            // filter the updated book
-            const currentBook = this.state.books.filter(book => book.id !== updatedBook.id);
+    updateBookShelf = async (updatedBook, shelf) => {
+        const response = await BooksAPI.update(updatedBook, shelf);
+        updatedBook.shelf = shelf;
+        // filter the updated book
+        const currentBook = this.state.books.filter(book => book.id !== updatedBook.id);
 
-            // Add updated book into the shelf
-            const currentBookShelf = [...currentBook, updatedBook];
-            // update state with changed book. replace book with updated one
-            this.setState(currentState => ({
-                books: currentBookShelf
-            }));
-        }).catch(err => {
-        });
+        // Add updated book into the shelf
+        const currentBookShelf = [...currentBook, updatedBook];
+        // update state with changed book. replace book with updated one
+        this.setState(currentState => ({
+            books: currentBookShelf
+        }));
     };
 
     render() {
