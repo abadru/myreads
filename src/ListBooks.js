@@ -1,74 +1,39 @@
-import React from "react";
+import React from 'react';
+import PropTypes from 'prop-types';
+import BookShelf from './BookShelf';
 import {Link} from "react-router-dom";
-import BookItem from "./BookItem";
 
-const ListBooks = (props) => {
-    const {books} = props;
-
-    const booksCurrentlyReading = books.filter (book => book.shelf === 'currentlyReading');
-    const booksWantToRead = books.filter (book => book.shelf === 'wantToRead');
-    const booksRead = books.filter (book => book.shelf === 'read');
+const BookList = props => {
+    const { books, updateBookShelf } = props;
+    const shelfTypes = [
+        { type: 'currentlyReading', title: 'Currently Reading' },
+        { type: 'wantToRead', title: 'Want to Read' },
+        { type: 'read', title: 'Read' }
+    ];
 
     return (
-        <div className="list-books">
-            <div className="list-books-title">
-                <h1>MyReads</h1>
-            </div>
-            <div className="list-books-content">
-                <div>
-                    {
-                        booksCurrentlyReading.length > 0 && (
-                            <div className="bookshelf">
-                                <h2 className="bookshelf-title">Currently Reading</h2>
-                                <div className="bookshelf-books">
-                                    <ol className="books-grid">
-                                        {
-                                            booksCurrentlyReading.map(book => (<BookItem key={book.id} book={book}/>))
-                                        }
-                                    </ol>
-                                </div>
-                            </div>
-                        )
-                    }
-
-                    {
-                        booksWantToRead.length > 0 && (
-                            <div className="bookshelf">
-                                <h2 className="bookshelf-title">Want to Read</h2>
-                                <div className="bookshelf-books">
-                                    <ol className="books-grid">
-                                        {
-                                            booksWantToRead.map(book => (<BookItem key={book.id} book={book}/>))
-                                        }
-                                    </ol>
-                                </div>
-                            </div>
-                        )
-                    }
-
-                    {
-                        booksRead.length > 0 && (
-                            <div className="bookshelf">
-                                <h2 className="bookshelf-title">Read</h2>
-                                <div className="bookshelf-books">
-                                    <ol className="books-grid">
-                                        {
-                                            booksRead.map(book => (<BookItem key={book.id} book={book}/>))
-                                        }
-                                    </ol>
-                                </div>
-                            </div>
-                        )
-                    }
-                </div>
-            </div>
+        <div className="list-books-content">
+            {shelfTypes.map((shelf, index) => {
+                const shelfBooks = books.filter(book => book.shelf === shelf.type);
+                return (
+                    <div className="bookshelf" key={index}>
+                        <h2 className="bookshelf-title">{shelf.title}</h2>
+                        <div className="bookshelf-books">
+                            <BookShelf books={shelfBooks} updateBookShelf={updateBookShelf} />
+                        </div>
+                    </div>
+                );
+            })}
             <div className="open-search">
-                <Link to='/search'>
-                    <button>Add Book</button>
-                </Link>
+                <Link to="/search">Search</Link>
             </div>
         </div>
     );
 };
 
-export default ListBooks;
+BookList.propTypes = {
+    books: PropTypes.array.isRequired,
+    updateBookShelf: PropTypes.func.isRequired
+};
+
+export default BookList;

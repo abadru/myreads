@@ -2,58 +2,75 @@ import React, { Component } from "react";
 import {Link} from "react-router-dom";
 import BookItem from "./BookItem";
 import * as BooksAPI from "./BooksAPI";
+import PropTypes from 'prop-types';
+
 
 class SearchBook extends Component {
-    state = {
-        books: [],
+    static propTypes = {
+        books: PropTypes.array.isRequired,
+        updateBookShelf: PropTypes.func.isRequired
     };
 
-    updateQuery = (query) => {
-        if (query.trim() !== '') {
-            BooksAPI.search(query)
-                .then((books) => {
-                    this.setState(() => ({
-                        books: books
-                    }));
-                }).catch((err) => {
-                console.log(err);
-                this.setState(() => ({
-                    books: []
-                }));
+    state = {
+        query: '',
+        newBooks: [],
+        error : false
+    };
+
+    getBooks = (query) => {
+        this.setState({ query });
+
+        // Get books only if user types something on the input box
+        if (query) {
+            BooksAPI.search(query.trim()).then(books => {
+                books.length > 0
+                    ? this.setState({ newBooks: books, error: false })
+                    : this.setState({ newBooks: [], error: true });
             });
         } else {
-            this.setState(() => ({
-                books: []
-            }));
+            this.setState({ newBooks: [], error: false });
         }
-    }
+    };
 
 
     render() {
-        const { books } = this.state;
+        const { query, newBooks, error } = this.state;
+        const { books, updateBookShelf } = this.props;
         return (
             <div className="search-books">
                 <div className="search-books-bar">
-                    <Link to='/' className="close-search"  />
-
+                    <Link to='/' className="close-search">Close</Link>
                     <div className="search-books-input-wrapper">
                         <input
                             type="text"
                             placeholder="Search by title or author"
-                            onChange={(event) => this.updateQuery(event.target.value)}
+                            value={query}
+                            onChange={(event) => this.getBooks(event.target.value)}
                         />
                     </div>
                 </div>
                 <div className="search-books-results">
                     {
-                        books.length > 0  && (
+                        newBooks.length > 0  && (
                             <ol className="books-grid">
                                 {
-                                    books.map( book => (<BookItem key={book.id} book ={book} />))
+                                    newBooks.map( book => (
+                                        <BookItem
+                                            key={book.id}
+                                            book ={book}
+                                            books={books}
+                                            updateBookShelf={updateBookShelf}
+                                        />
+                                        )
+                                    )
                                 }
                             </ol>
                         )
                     }
+
+                    {error && (
+                        <h3>No books found. Please try again!</h3>
+                    )}
                 </div>
             </div>
         );
