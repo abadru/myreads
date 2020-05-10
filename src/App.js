@@ -20,12 +20,15 @@ class BooksApp extends React.Component {
             });
     }
 
-    updateBookShelf = (book, shelf) => {
-        BooksAPI.update(book, shelf).then(response => {
+    updateBookShelf = (updatedBook, shelf) => {
+        BooksAPI.update(updatedBook, shelf).then(response => {
             // Update book shelf
-            book.shelf = shelf;
-            const currentBookShelf = this.state.books.filter(book => book.id === book.id);
-            currentBookShelf.concat(book);
+            updatedBook.shelf = shelf;
+            // filter the updated book
+            const currentBook= this.state.books.filter(book => book.id !== updatedBook.id);
+
+            // Add updated book into the shelf
+            const currentBookShelf = [...currentBook, updatedBook];
             // update state with changed book. replace book with updated one
             this.setState(currentState => ({
                 books: currentBookShelf
@@ -50,7 +53,7 @@ class BooksApp extends React.Component {
                                 books={books}
                                 updateBookShelf={this.updateBookShelf}/>
                             <div className="open-search">
-                                <Link to="/search">Search</Link>
+                                <Link to="/search"><button>Search</button></Link>
                             </div>
                         </div>
                     )}
