@@ -3,6 +3,7 @@ import {Link} from "react-router-dom";
 import BookItem from "./BookItem";
 import * as BooksAPI from "./api/BooksAPI";
 import PropTypes from 'prop-types';
+import SearchBox from "./SearchBox";
 
 
 class SearchBook extends Component {
@@ -38,17 +39,7 @@ class SearchBook extends Component {
         const {books, updateBookShelf} = this.props;
         return (
             <div className="search-books">
-                <div className="search-books-bar">
-                    <Link to='/' className="close-search">Close</Link>
-                    <div className="search-books-input-wrapper">
-                        <input
-                            type="text"
-                            placeholder="Search by title or author"
-                            value={query}
-                            onChange={(event) => this.getBooks(event.target.value)}
-                        />
-                    </div>
-                </div>
+                <SearchBox query={query} getBooks={this.getBooks} />
                 <div className="search-books-results">
                     {
                         newBooks.length > 0 && (

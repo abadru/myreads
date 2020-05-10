@@ -33,6 +33,7 @@ class BooksApp extends React.Component {
             this.setState(currentState => ({
                 books: currentBookShelf
             }));
+        }).catch(err => {
         });
     };
 
