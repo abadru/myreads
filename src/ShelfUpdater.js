@@ -8,8 +8,8 @@ class ShelfUpdater extends Component {
         updateBookShelf: PropTypes.func.isRequired
     };
 
-    updateShelf = event => {
-        this.props.updateBookShelf(this.props.book, event.target.value);
+    updateShelf = (book, shelf) => {
+        this.props.updateBookShelf(book, shelf);
     }
 
     render() {
@@ -28,7 +28,10 @@ class ShelfUpdater extends Component {
 
         return (
             <div className="book-shelf-changer">
-                <select onChange={this.updateShelf} defaultValue={currentShelf}>
+                <select
+                    onChange={(e) => this.updateShelf(book, e.target.value)}
+                    defaultValue={currentShelf}
+                >
                     <option value="none" disabled>
                         Move to...
                     </option>

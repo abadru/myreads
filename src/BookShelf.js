@@ -13,6 +13,7 @@ class BookShelf extends Component {
 
         return (
             <ol className="books-grid">
+                {books.length <=0 && <div className='alert alert-info'>There is no book on this shelf...</div>}
                 {books.map(book => (
                     <BookItem
                         book={book}
